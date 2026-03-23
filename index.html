@@ -51,7 +51,8 @@
 </div>
     
     <h1>Transparent fMRI analysis,<br><em>one voxel at a time.</em></h1>
-    <p class="hero-sub">A lightweight MATLAB toolbox for post-preprocessing human fMRI analysis. All functions share one 228,453-element MNI152 brain vector — no frameworks, no compiled code, no hidden steps. Built for naturalistic paradigms. In use since 2012.</p>
+    <p class="hero-sub">A lightweight MATLAB toolbox for human fMRI analysis. All functions operate on a single, fixed MNI152 brain vector. No frameworks, no compiled code, no hidden steps. Built for  continuous-feature,  naturalistic paradigms, where conventional GLM approaches fall short. From signal preprocessing through statistical inference and visualization. In active use since 2012. Now publically available.</p>
+    <!-- <p class="hero-sub">A lightweight MATLAB toolbox for post-preprocessing human fMRI analysis. All functions share one 228,453-element MNI152 brain vector — no frameworks, no compiled code, no hidden steps. Built for naturalistic paradigms. In use since 2012.</p> -->
     <div class="hero-buttons">
       <a class="btn btn-primary" href="https://github.com/iburunat/JY-fMRItoolbox" target="_blank">⬇ Download</a>
       <a class="btn btn-primary" href="#">📄 Preprint</a>
@@ -85,13 +86,14 @@
       <div class="code-line"><span class="ln">7</span><span class="lc">  <span class="c-v">data</span>   = <span class="c-f">fmri_detrend</span>(<span class="c-v">data</span>, <span class="c-n">6</span>);</span></div>
       <div class="code-line"><span class="ln">8</span><span class="lc">  <span class="c-v">data</span>   = <span class="c-f">fmri_tempsmooth</span>(<span class="c-v">data</span>, <span class="c-n">4</span>);</span></div>
       <div class="code-line"><span class="ln">9</span><span class="lc">  <span class="c-v">r_maps</span>(:,<span class="c-v">s</span>) = <span class="c-f">fmri_corregressor</span>(<span class="c-v">data</span>(<span class="c-v">seed</span>,:)', <span class="c-v">data</span>);</span></div>
-      <div class="code-line"><span class="ln">10</span><span class="lc">  <span class="c-v">df_all</span>(<span class="c-v">s</span>) = <span class="c-f">mean</span>(<span class="c-f">arrayfun</span>(@(<span class="c-v">v</span>) <span class="c-f">fmri_effdf</span>(<span class="c-v">data</span>(<span class="c-v">seed</span>,:)', <span class="c-v">data</span>(<span class="c-v">v</span>,:)'), <span class="c-f">randperm</span>(<span class="c-n">228453</span>, <span class="c-n">1000</span>)));</span></div>
-      <div class="code-line"><span class="ln">11</span><span class="lc"><span class="c-k">end</span></span></div>
+      <div class="code-line"><span class="ln">10</span><span class="lc">  <span class="c-v">df_all</span>(<span class="c-v">s</span>) = <span class="c-f">mean</span>(<span class="c-f">arrayfun</span>(@(<span class="c-v">v</span>) <span class="c-f">fmri_effdf</span>(<span class="c-v">data</span>(<span class="c-v">seed</span>,:)',...</span></div>
+      <div class="code-line"><span class="ln">11</span><span class="lc">  <span class="c-v">            data</span>(<span class="c-v">v</span>,:)'), <span class="c-f">randperm</span>(<span class="c-n">228453</span>, <span class="c-n">1000</span>)));</span></div>
+      <div class="code-line"><span class="ln">12</span><span class="lc"><span class="c-k">end</span></span></div>
       <div class="code-line"><span class="ln"> </span><span class="lc"> </span></div>
-      <div class="code-line"><span class="ln">12</span><span class="lc"><span class="c-v">z_group</span> = <span class="c-f">mean</span>(<span class="c-f">fmri_fisherz</span>(<span class="c-v">r_maps</span>, <span class="c-f">mean</span>(<span class="c-v">df_all</span>)), <span class="c-n">2</span>);</span></div>
-      <div class="code-line"><span class="ln">13</span><span class="lc"><span class="c-v">clean</span>   = <span class="c-f">fmri_cleanclusters</span>(<span class="c-v">z_group</span> &gt; <span class="c-n">3</span>, <span class="c-n">50</span>, <span class="c-n">0</span>); <span class="c-c">% z>3 ≈ p&lt;0.001</span></span></div>
-      <div class="code-line"><span class="ln">14</span><span class="lc"><span class="c-f">fmri_regiontable</span>(<span class="c-v">clean</span>, <span class="c-v">z_group</span>, <span class="c-n">50</span>, <span class="c-n">10</span>, <span class="c-n">1</span>);</span></div>
-      <div class="code-line"><span class="ln">15</span><span class="lc"><span class="c-f">fmri_braincake</span>(<span class="c-v">z_group<span class="c-n">)</span></div>
+      <div class="code-line"><span class="ln">13</span><span class="lc"><span class="c-v">z_group</span> = <span class="c-f">mean</span>(<span class="c-f">fmri_fisherz</span>(<span class="c-v">r_maps</span>, <span class="c-f">mean</span>(<span class="c-v">df_all</span>)), <span class="c-n">2</span>);</span></div>
+      <div class="code-line"><span class="ln">14</span><span class="lc"><span class="c-v">clean</span>   = <span class="c-f">fmri_cleanclusters</span>(<span class="c-v">z_group</span> &gt; <span class="c-n">3</span>, <span class="c-n">50</span>, <span class="c-n">0</span>); <span class="c-c">% z>3 ≈ p&lt;0.001</span></span></div>
+      <div class="code-line"><span class="ln">15</span><span class="lc"><span class="c-f">fmri_regiontable</span>(<span class="c-v">clean</span>, <span class="c-v">z_group</span>, <span class="c-n">50</span>, <span class="c-n">10</span>, <span class="c-n">1</span>);</span></div>
+      <div class="code-line"><span class="ln">16</span><span class="lc"><span class="c-f">fmri_braincake</span>(<span class="c-v">z_group<span class="c-n">)</span></div>
 
       <!-- Overlay container — appears on hover -->
       <div class="overlay-container" id="overlayContainer"></div>
@@ -239,10 +241,10 @@
   { num: '06', label: 'DETREND',                 start: 7,  end: 7  },
   { num: '07', label: 'TEMPORAL SMOOTHING',      start: 8,  end: 8  },
   { num: '08', label: 'SEED CORRELATION',        start: 9,  end: 9  },
-  { num: '09', label: 'EFFECTIVE df',            start: 10, end: 10 },
-  { num: '10', label: 'FISHER Z GROUP AVERAGE',  start: 13, end: 13 },
-  { num: '11', label: 'CLUSTER INFERENCE',       start: 14, end: 14 },
-  { num: '12', label: 'ATLAS LABELS + VISUALISE',start: 15, end: 16 },
+  { num: '09', label: 'EFFECTIVE DoF ESTIMATION',start: 10, end: 11 },
+  { num: '10', label: 'FISHER Z GROUP AVERAGE',  start: 14, end: 14 },
+  { num: '11', label: 'CLUSTER INFERENCE',       start: 15, end: 15 },
+  { num: '12', label: 'ROI TABLE + VISUALISE',start: 16, end: 17 },
 ];
 
   const container = document.getElementById('overlayContainer');
